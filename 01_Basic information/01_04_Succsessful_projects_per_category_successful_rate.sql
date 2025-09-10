@@ -1,4 +1,4 @@
-with successful_records as (
+with successful_records_categories as (
 select 
 	Category
 	,count(Category) as Successful_category_count
@@ -6,7 +6,7 @@ from kickstarter
 where State = 'Successful'
 group by Category
 order by 2 desc),
-all_records as (
+all_records_categories as (
 select 
 	Category
 	,count(Category) as Category_count
@@ -18,6 +18,6 @@ select sr.Category
 	,sr.Successful_category_count
 	,ar.Category_count
 	,sr.Successful_category_count / ar.Category_count as Successful_rate
-from successful_records as sr
-inner join all_records as ar
+from successful_records_categories as sr
+inner join all_records_categories as ar
 	on sr.Category = ar.Category
